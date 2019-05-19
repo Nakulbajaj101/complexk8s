@@ -1,0 +1,20 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: bridgedataanalytics-tls
+spec:
+  secretName: bridgedataanalytics
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: bridgedataanalytics.com
+  dnsNames:
+    - bridgedataanalytics.com
+    - wwww.bridgedataanalytics.com
+  acme:
+    config:
+      - http01:
+          ingressClass: nginx
+        domains:
+          - bridgedataanalytics.com
+          - wwww.bridgedataanalytics.com
