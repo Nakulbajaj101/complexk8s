@@ -22,7 +22,7 @@ function App() {
           Learn React
         </a>
       </header>
-      <h1> Welcome to Fib Calculator</h1>
+      <h1> Welcome to Fib Calculator on kubernetes GKE</h1>
       <Link to="/">Home</Link>
       <div></div>
       <Link to="/otherpage">OtherPage</Link>
