@@ -1,0 +1,29 @@
+sudo: required
+services:
+  - docker
+env:
+  global:
+    - GIT_SHA=$(git rev-parse HEAD)
+    - CLOUDSDK_CORE_DISABLE_PROMPTS=1
+before_install:
+  - openssl aes-256-cbc -K $encrypted_3842332ce86e_key -iv $encrypted_3842332ce86e_iv
+    -in service_account.json.enc -out ./Complex/service_account.json -d
+  - curl https://sdk.cloud.google.com | bash > /dev/null;
+  - source $HOME/google-cloud-sdk/path.bash.inc
+  - gcloud components update kubectl
+  - gcloud auth activate-service-account --key-file service-account.json
+  - gcloud config set project bridge-data-analytics
+  - gcloud config set compute/zone australia-southeast1-a
+  - gcloud container clusters get-credentials multi-cluster
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker build -t nakul/complex-clienttesting:latest -f ./Complex/client/Dockerfile.dev ./Complex/client
+
+script:
+  - docker run -it -e CI=true nakul/complex-clienttesting npm test -- --coverage
+
+deploy:
+  provider: script
+  script: bash ./deploy.sh
+  on:
+    repo: Nakulbajaj101/complexk8s
+    branch: master
