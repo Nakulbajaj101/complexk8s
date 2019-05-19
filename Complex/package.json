@@ -1,0 +1,19 @@
+{
+  "name": "complex",
+  "version": "1.0.0",
+  "description": "complex project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nakulbajaj101/Complex.git"
+  },
+  "author": "nakul bajaj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nakulbajaj101/Complex/issues"
+  },
+  "homepage": "https://github.com/Nakulbajaj101/Complex#readme"
+}
